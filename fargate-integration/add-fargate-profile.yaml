@@ -1,0 +1,19 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: EKS-course-cluster
+  region: us-east-1
+
+fargateProfiles:
+  - name: fargatedemo
+    podExecutionRoleARN: arn:aws:iam::<>:role/AmazonEKSFargatePodExecutionRole
+    selectors:
+      - namespace: fargatedemo
+  - name: staging
+    podExecutionRoleARN: arn:aws:iam::<>:role/AmazonEKSFargatePodExecutionRole
+    selectors:
+      - namespace: staging
+        labels:
+          env: staging
+          checks: passed
